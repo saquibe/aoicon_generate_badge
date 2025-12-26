@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getDatabase } from '@/lib/mongodb';
+import { NextRequest, NextResponse } from "next/server";
+import { getDatabase } from "@/lib/mongodb";
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,74 +7,65 @@ export async function POST(req: NextRequest) {
 
     if (!identifier || !otp) {
       return NextResponse.json(
-        { error: 'Email/mobile and OTP are required' },
+        { success: false, error: "Identifier and OTP are required" },
         { status: 400 }
       );
     }
 
-    const db = await getDatabase();
-    const usersCollection = db.collection('users');
+    // console.log("Verifying OTP for:", identifier, "OTP:", otp);
 
-    const isEmail = identifier.includes('@');
+    const db = await getDatabase();
+    const usersCollection = db.collection("user_reg");
+
+    const isEmail = identifier.includes("@");
+    const isMobile = /^\d{10}$/.test(identifier);
 
     let user;
     if (isEmail) {
-      user = await usersCollection.findOne({ 'Email ID': identifier });
+      user = await usersCollection.findOne({
+        "Email ID": identifier,
+        otp: otp,
+        otpExpiry: { $gt: new Date() },
+      });
     } else {
-      const mobileNumber = parseInt(identifier);
-      user = await usersCollection.findOne({ 'Mobile': mobileNumber });
+      const mobileNumber = parseInt(identifier, 10);
+      user = await usersCollection.findOne({
+        Mobile: mobileNumber,
+        otp: otp,
+        otpExpiry: { $gt: new Date() },
+      });
     }
+
+    // console.log("OTP verification result:", user ? "VALID" : "INVALID");
 
     if (!user) {
       return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
+        { success: false, error: "Invalid OTP or OTP expired" },
+        { status: 401 }
       );
     }
 
-    if (!user.otp || !user.otpExpiry) {
-      return NextResponse.json(
-        { error: 'No OTP found. Please request a new OTP.' },
-        { status: 400 }
-      );
-    }
-
-    if (new Date() > new Date(user.otpExpiry)) {
-      return NextResponse.json(
-        { error: 'OTP has expired. Please request a new OTP.' },
-        { status: 400 }
-      );
-    }
-
-    if (user.otp !== otp) {
-      return NextResponse.json(
-        { error: 'Invalid OTP. Please try again.' },
-        { status: 400 }
-      );
-    }
-
+    // Clear OTP after successful verification
     await usersCollection.updateOne(
       { _id: user._id },
-      {
-        $unset: { otp: '', otpExpiry: '' }
-      }
+      { $unset: { otp: "", otpExpiry: "" } }
     );
 
     return NextResponse.json({
       success: true,
       user: {
         id: user._id.toString(),
-        name: user['Full Name'],
-        email: user['Email ID'],
-        mobile: user['Mobile'],
-        registrationNumber: user['Registration Number'],
-        certUrl: user['cert_url']
-      }
+        name: user["Full Name"],
+        email: user["Email ID"],
+        registrationNumber: user["Registration Number"],
+        mobile: user["Mobile"].toString(),
+        certUrl: user["cert_url"],
+      },
     });
   } catch (error: any) {
-    console.error('Verify OTP error:', error);
+    console.error("Verify OTP error:", error);
     return NextResponse.json(
-      { error: error.message || 'Failed to verify OTP' },
+      { success: false, error: error.message || "Failed to verify OTP" },
       { status: 500 }
     );
   }

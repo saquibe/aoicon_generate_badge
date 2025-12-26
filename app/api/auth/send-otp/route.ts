@@ -3,7 +3,6 @@ import { getDatabase } from "@/lib/mongodb";
 import { generateOTP, generateOTPExpiry } from "@/lib/otp";
 import { sendSMS } from "@/lib/sms";
 import { sendEmail } from "@/lib/email";
-import { Long } from "mongodb";
 
 export async function POST(req: NextRequest) {
   try {
@@ -30,11 +29,34 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const user = await usersCollection.findOne(
-      isEmail
-        ? { "Email ID": identifier }
-        : { Mobile: Long.fromString(identifier) }
-    );
+    // console.log("Searching for:", identifier);
+    // console.log("Is email:", isEmail);
+    // console.log("Is mobile:", isMobile);
+
+    let user;
+    if (isEmail) {
+      // For email search - exact match
+      user = await usersCollection.findOne({
+        "Email ID": identifier,
+      });
+    } else {
+      // For mobile search - convert to number
+      // Mobile numbers are stored as numbers (7331131070) not strings
+      const mobileNumber = parseInt(identifier, 10);
+      user = await usersCollection.findOne({
+        Mobile: mobileNumber,
+      });
+    }
+
+    // console.log("Query result:", user ? "FOUND" : "NOT FOUND");
+    // if (user) {
+    //   console.log("User found:", {
+    //     name: user["Full Name"],
+    //     email: user["Email ID"],
+    //     mobile: user["Mobile"],
+    //     mobileType: typeof user["Mobile"],
+    //   });
+    // }
 
     if (!user) {
       return NextResponse.json(
@@ -56,6 +78,11 @@ export async function POST(req: NextRequest) {
       }
     );
 
+    // console.log("OTP generated:", otp, "for:", identifier);
+
+    // For testing - skip actual email/SMS sending
+    // TODO: Uncomment when ready for production
+
     if (isEmail) {
       await sendEmail(identifier, otp);
     } else {
@@ -66,6 +93,8 @@ export async function POST(req: NextRequest) {
       success: true,
       message: `OTP sent successfully to your ${isEmail ? "email" : "mobile"}`,
       type: isEmail ? "email" : "mobile",
+      // For testing - include OTP in response
+      testOtp: otp,
     });
   } catch (error: any) {
     console.error("Send OTP error:", error);

@@ -1,28 +1,13 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Providers } from './providers';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Providers } from "./providers";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'AOICON 2026 KOLKATA - Digital Badge',
-  description: 'Access your AOICON 2026 KOLKATA digital badge',
-  openGraph: {
-    images: [
-      {
-        url: 'https://bolt.new/static/og_default.png',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: [
-      {
-        url: 'https://bolt.new/static/og_default.png',
-      },
-    ],
-  },
+  title: "AOICON 2026 KOLKATA - Digital Badge",
+  description: "Access your AOICON 2026 KOLKATA digital badge",
 };
 
 export default function RootLayout({

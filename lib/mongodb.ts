@@ -5,7 +5,6 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI;
-const dbName = process.env.MONGODB_DB || "aoicon2026";
 
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
@@ -15,8 +14,9 @@ export async function connectToDatabase() {
     return { client: cachedClient, db: cachedDb };
   }
 
+  // Connect to MongoDB using the URI (database is already specified in URI)
   const client = await MongoClient.connect(uri);
-  const db = client.db(dbName);
+  const db = client.db(); // Get database from the connection string
 
   cachedClient = client;
   cachedDb = db;
