@@ -187,9 +187,9 @@ export default function BadgePage() {
             {/* Badge Header */}
             <div className="bg-gradient-to-br from-blue-600 to-blue-800 px-4 py-5 text-center relative overflow-hidden">
               <div className="relative">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm mb-2 shadow">
+                {/* <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm mb-2 shadow">
                   <Award className="w-6 h-6 text-white" />
-                </div>
+                </div> */}
                 <h2 className="text-xl font-bold text-white mb-1">
                   AOICON 2026
                 </h2>

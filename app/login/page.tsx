@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Mail, Phone, Shield } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [identifier, setIdentifier] = useState("");
@@ -89,23 +90,43 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          {/* <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 mb-4 shadow-lg">
-            <Shield className="w-10 h-10 text-white" />
-          </div> */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">AOICON 2026</h1>
-          <p className="text-xl text-gray-600">KOLKATA</p>
+          {/* Branding Image */}
+          <div className="relative w-full flex justify-center mb-10 mt-[-100px]">
+            <Image
+              src="/aoicon-image.jpeg"
+              alt="AOICON 2026 Kolkata"
+              width={420}
+              height={140}
+              priority
+              className="
+        w-full
+        max-w-[280px]
+        sm:max-w-[340px]
+        md:max-w-[420px]
+        h-auto
+        object-contain
+      "
+            />
+          </div>
+
+          {/* <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+            AOICON 2026
+          </h1>
+          <p className="text-sm sm:text-lg text-gray-600">KOLKATA</p> */}
         </div>
 
         <Card className="shadow-2xl border-0">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl text-center">
-              {step === "identifier" ? "Welcome Back" : "Verify OTP"}
-            </CardTitle>
-            <CardDescription className="text-center">
+            <CardTitle className="text-xl text-center text-gray-600">
               {step === "identifier"
                 ? "Enter your registered email or mobile number"
                 : "Enter the OTP sent to your email/mobile"}
-            </CardDescription>
+            </CardTitle>
+            {/* <CardDescription className="text-center">
+              {step === "identifier"
+                ? "Enter your registered email or mobile number"
+                : "Enter the OTP sent to your email/mobile"}
+            </CardDescription> */}
           </CardHeader>
           <CardContent>
             {error && (
@@ -121,7 +142,7 @@ export default function LoginPage() {
             )}
 
             {step === "identifier" ? (
-              <form onSubmit={handleSendOTP} className="space-y-4">
+              <form onSubmit={handleSendOTP} className="space-y-8">
                 <div className="space-y-2">
                   <div className="relative">
                     <Input
@@ -133,14 +154,14 @@ export default function LoginPage() {
                       required
                     />
                     {identifier.includes("@") ? (
-                      <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                      <Mail className="absolute left-3 top-4 h-5 w-5 text-gray-400" />
                     ) : (
-                      <Phone className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                      <Phone className="absolute left-3 top-4 h-5 w-5 text-gray-400" />
                     )}
                   </div>
-                  <p className="text-xs text-gray-500 pl-1">
+                  {/* <p className="text-xs text-gray-500 pl-1">
                     Enter your registered email or 10-digit mobile number
-                  </p>
+                  </p> */}
                 </div>
 
                 <Button
