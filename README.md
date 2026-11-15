@@ -37,12 +37,14 @@ ZEPTOMAIL_FROM_NAME=AOICON 2026 Registration Team
 ### 2. API Keys Required
 
 #### SMS Gateway Hub
+
 1. Login to https://www.smsgatewayhub.com/Account/Login
 2. Navigate to API section
 3. Get your API Key, User ID, and Password
 4. Add them to `.env.local`
 
 #### ZeptoMail
+
 1. Login to https://zeptomail.zoho.in/
 2. Go to Settings > SMTP & API Info
 3. Generate API key
@@ -101,6 +103,7 @@ Visit http://localhost:3000
 ## MongoDB Collection Setup
 
 If you need to update the collection name, modify the queries in:
+
 - `/app/api/auth/send-otp/route.ts`
 - `/app/api/auth/verify-otp/route.ts`
 

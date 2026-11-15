@@ -90,7 +90,7 @@ export default function BadgePage() {
       });
 
       const link = document.createElement("a");
-      link.download = `AOICON-2026-Badge-${user.registrationNumber}.png`;
+      link.download = `AROICON-2026-Badge-${user.registrationNumber}.png`;
       link.href = dataUrl;
       link.click();
     } catch (error) {
@@ -128,18 +128,18 @@ export default function BadgePage() {
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File(
         [blob],
-        `AOICON-2026-Badge-${user.registrationNumber}.png`,
+        `AROICON-2026-Badge-${user.registrationNumber}.png`,
         {
           type: "image/png",
-        }
+        },
       );
 
       if (navigator.share && navigator.canShare?.({ files: [file] })) {
         try {
           await navigator.share({
             files: [file],
-            title: `AOICON 2026 Badge - ${user.name}`,
-            text: `My AOICON 2026 KOLKATA Badge - Registration: ${user.registrationNumber}`,
+            title: `AROICON 2026 Badge - ${user.name}`,
+            text: `My AROICON 2026 HYDERABAD Badge - Registration: ${user.registrationNumber}`,
           });
         } catch (err) {
           console.error("Share error:", err);
@@ -191,9 +191,9 @@ export default function BadgePage() {
                   <Award className="w-6 h-6 text-white" />
                 </div> */}
                 <h2 className="text-xl font-bold text-white mb-1">
-                  AOICON 2026
+                  AROICON 2026
                 </h2>
-                <p className="text-sm text-blue-100">KOLKATA</p>
+                <p className="text-sm text-blue-100">HYDERABAD</p>
               </div>
             </div>
 

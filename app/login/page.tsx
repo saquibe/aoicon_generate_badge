@@ -94,7 +94,7 @@ export default function LoginPage() {
           <div className="relative w-full flex justify-center mb-10 mt-[-100px]">
             <Image
               src="/aroicon2026.webp"
-              alt="AOICON 2026 Kolkata"
+              alt="AROICON 2026 HYDERABAD"
               width={420}
               height={140}
               priority
@@ -241,7 +241,7 @@ export default function LoginPage() {
         </Card>
 
         <p className="text-center text-sm text-gray-600 mt-6">
-          Need help? Contact the registration team
+          RegistrationTeam.in by SaaScraft Studio (India) Pvt. Ltd.
         </p>
       </div>
     </div>

@@ -19,7 +19,7 @@ export async function sendSMS(mobile: string, otp: string) {
     }
 
     // Use the exact message template required by your SMS provider
-    const message = `Login OTP for AOICON 2026 Registration is ${otp}. Do not share this OTP to anyone for security reasons. - SaaScraft Studio`;
+    const message = `Login OTP for AROICON 2026 Registration is ${otp}. Do not share this OTP to anyone for security reasons. - SaaScraft Studio`;
 
     // Change from axios.get to axios.post
     const response = await axios.post(
