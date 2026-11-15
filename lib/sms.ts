@@ -14,7 +14,7 @@ export async function sendSMS(mobile: string, otp: string) {
     const formattedMobile = mobile.replace(/^0|^\+91|^91/, ""); // Remove prefixes
     if (!/^\d{10}$/.test(formattedMobile)) {
       throw new Error(
-        `Invalid mobile number format: ${mobile}. Expected 10 digits.`
+        `Invalid mobile number format: ${mobile}. Expected 10 digits.`,
       );
     }
 
@@ -43,10 +43,10 @@ export async function sendSMS(mobile: string, otp: string) {
         headers: {
           Accept: "application/json", // Specify expected response format
         },
-      }
+      },
     );
 
-    console.log("SMS API Response:", response.data); // Log response for debugging
+    // console.log("SMS API Response:", response.data); // Log response for debugging
 
     // Check the response. Success codes vary by provider (sometimes '000' or '200').
     if (response.data.ErrorCode === "000") {

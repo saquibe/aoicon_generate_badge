@@ -93,7 +93,7 @@ export default function LoginPage() {
           {/* Branding Image */}
           <div className="relative w-full flex justify-center mb-10 mt-[-100px]">
             <Image
-              src="/aoicon-image.jpeg"
+              src="/aroicon2026.webp"
               alt="AOICON 2026 Kolkata"
               width={420}
               height={140}
