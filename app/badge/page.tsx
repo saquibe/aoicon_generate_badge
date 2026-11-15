@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Loader2, Download, Share2 } from "lucide-react";
 import { toPng } from "html-to-image";
+import Image from "next/image";
 
 export default function BadgePage() {
   const { data: session, status } = useSession();
@@ -186,9 +187,13 @@ export default function BadgePage() {
           >
             {/* Badge Header */}
             <div className="w-full bg-white">
-              <img
+              <Image
                 src="/aroicon2026.webp"
                 alt="AROICON 2026, Hyderabad"
+                width={1454}
+                height={493}
+                priority
+                unoptimized
                 className="block h-auto w-full"
               />
             </div>

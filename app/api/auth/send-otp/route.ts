@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     // TODO: Uncomment when ready for production
 
     if (isEmail) {
-      await sendEmail(identifier, otp);
+      await sendEmail(identifier, otp, user["Full Name"] || "Participant");
     } else {
       await sendSMS(identifier, otp);
     }
