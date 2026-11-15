@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { verifyOtp } from '@/lib/verify-otp';
 
 const handler = NextAuth({
   providers: [
@@ -15,30 +16,7 @@ const handler = NextAuth({
         }
 
         try {
-          const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/verify-otp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              identifier: credentials.identifier,
-              otp: credentials.otp
-            })
-          });
-
-          const data = await response.json();
-
-          if (response.ok && data.success) {
-            return {
-              id: data.user.id,
-              name: data.user.name,
-              email: data.user.email,
-              registrationNumber: data.user.registrationNumber,
-              badgeCategory: data.user.badgeCategory,
-              mobile: data.user.mobile,
-              certUrl: data.user.certUrl
-            };
-          }
-
-          return null;
+          return await verifyOtp(credentials.identifier, credentials.otp);
         } catch (error) {
           console.error('Auth error:', error);
           return null;

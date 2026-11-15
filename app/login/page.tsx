@@ -64,13 +64,15 @@ export default function LoginPage() {
       const result = await signIn("credentials", {
         identifier,
         otp,
+        callbackUrl: "/badge",
         redirect: false,
       });
 
-      if (result?.error) {
+      if (!result?.ok || result.error) {
         setError("Invalid OTP. Please try again.");
-      } else if (result?.ok) {
-        router.push("/badge");
+      } else {
+        router.replace(result.url || "/badge");
+        router.refresh();
       }
     } catch (err: any) {
       setError(err.message || "Something went wrong");
