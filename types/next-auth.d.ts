@@ -6,6 +6,7 @@ declare module "next-auth" {
     name: string;
     email: string;
     registrationNumber: string;
+    badgeCategory: string;
     mobile: string;
     certUrl: string;
   }
@@ -16,6 +17,7 @@ declare module "next-auth" {
       name: string;
       email: string;
       registrationNumber: string;
+      badgeCategory: string;
       mobile: string;
       certUrl: string;
     };
@@ -26,6 +28,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     registrationNumber: string;
+    badgeCategory: string;
     mobile: string;
     certUrl: string;
   }

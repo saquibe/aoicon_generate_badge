@@ -32,6 +32,7 @@ const handler = NextAuth({
               name: data.user.name,
               email: data.user.email,
               registrationNumber: data.user.registrationNumber,
+              badgeCategory: data.user.badgeCategory,
               mobile: data.user.mobile,
               certUrl: data.user.certUrl
             };
@@ -50,6 +51,7 @@ const handler = NextAuth({
       if (user) {
         token.id = user.id;
         token.registrationNumber = (user as any).registrationNumber;
+        token.badgeCategory = (user as any).badgeCategory;
         token.mobile = (user as any).mobile;
         token.certUrl = (user as any).certUrl;
       }
@@ -59,6 +61,7 @@ const handler = NextAuth({
       if (session.user) {
         (session.user as any).id = token.id;
         (session.user as any).registrationNumber = token.registrationNumber;
+        (session.user as any).badgeCategory = token.badgeCategory;
         (session.user as any).mobile = token.mobile;
         (session.user as any).certUrl = token.certUrl;
       }

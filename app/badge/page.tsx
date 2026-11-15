@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Loader2, Download, Share2, Award, Hash } from "lucide-react";
+import { Loader2, Download, Share2 } from "lucide-react";
 import { toPng } from "html-to-image";
 
 export default function BadgePage() {
@@ -185,16 +185,12 @@ export default function BadgePage() {
             }}
           >
             {/* Badge Header */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-800 px-4 py-5 text-center relative overflow-hidden">
-              <div className="relative">
-                {/* <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm mb-2 shadow">
-                  <Award className="w-6 h-6 text-white" />
-                </div> */}
-                <h2 className="text-xl font-bold text-white mb-1">
-                  AROICON 2026
-                </h2>
-                <p className="text-sm text-blue-100">HYDERABAD</p>
-              </div>
+            <div className="w-full bg-white">
+              <img
+                src="/aroicon2026.webp"
+                alt="AROICON 2026, Hyderabad"
+                className="block h-auto w-full"
+              />
             </div>
 
             {/* Badge Content */}
@@ -208,10 +204,10 @@ export default function BadgePage() {
 
               {/* Registration Number */}
               <div className="text-center">
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">
-                  REGISTRATION NUMBER
+                <p className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2">
+                  {user.badgeCategory || "DELEGATE"}
                 </p>
-                <div className="inline-block bg-gradient-to-r from-blue-700 to-blue-900 text-white px-4 py-2 rounded-md">
+                <div className="inline-block bg-gradient-to-r from-blue-800 to-blue-950 text-white px-4 py-2 rounded-md border-b-2 border-yellow-400">
                   <p className="text-base font-bold tracking-wider">
                     {user.registrationNumber}
                   </p>

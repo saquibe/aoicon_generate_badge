@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
         name: user["Full Name"],
         email: user["Email ID"],
         registrationNumber: user["Registration Number"],
+        badgeCategory: user.badge_category,
         mobile: user["Mobile"].toString(),
         certUrl: user["cert_url"],
       },
