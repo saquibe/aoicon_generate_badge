@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Loader2, Download, Share2 } from "lucide-react";
 import { toPng } from "html-to-image";
-import Image from "next/image";
 
 export default function BadgePage() {
   const { data: session, status } = useSession();
@@ -186,16 +185,14 @@ export default function BadgePage() {
             }}
           >
             {/* Badge Header */}
-            <div className="w-full bg-white">
-              <Image
-                src="/aroicon2026.webp"
-                alt="AROICON 2026, Hyderabad"
-                width={1454}
-                height={493}
-                priority
-                unoptimized
-                className="block h-auto w-full"
-              />
+            <div className="w-full bg-gradient-to-br from-blue-900 to-blue-700 px-4 py-5 text-center text-white">
+              <h2 className="text-lg font-bold tracking-wide">
+                AROICON 2026, Hyderabad
+              </h2>
+              <p className="mt-2 text-sm font-semibold text-yellow-300">
+                3rd - 6th December 2026
+              </p>
+              <p className="mt-1 text-sm text-blue-100">HICC Hyderabad</p>
             </div>
 
             {/* Badge Content */}
