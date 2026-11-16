@@ -230,7 +230,7 @@ export default function BadgePage() {
                     />
                   </div>
                   <p className="text-xs text-gray-500 mt-2">
-                    Scan QR for verification
+                    Please collect your physical badge at the conference venue
                   </p>
                 </div>
               )}
