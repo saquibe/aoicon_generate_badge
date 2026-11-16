@@ -59,6 +59,9 @@ export default function BadgePage() {
   }
 
   const user = session.user as any;
+  const badgeFileName = `${user.name} ${user.registrationNumber} AROICON 2026`
+    .replace(/[<>:"/\\|?*\u0000-\u001F]/g, "")
+    .trim() + ".png";
 
   const handleDownload = async () => {
     if (!badgeRef.current) return;
@@ -90,7 +93,7 @@ export default function BadgePage() {
       });
 
       const link = document.createElement("a");
-      link.download = `AROICON-2026-Badge-${user.registrationNumber}.png`;
+      link.download = badgeFileName;
       link.href = dataUrl;
       link.click();
     } catch (error) {
@@ -128,7 +131,7 @@ export default function BadgePage() {
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File(
         [blob],
-        `AROICON-2026-Badge-${user.registrationNumber}.png`,
+        badgeFileName,
         {
           type: "image/png",
         },
