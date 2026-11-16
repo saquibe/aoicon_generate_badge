@@ -121,7 +121,7 @@ export default function LoginPage() {
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-xl text-center text-gray-600">
               {step === "identifier"
-                ? "Enter your registered email or mobile number"
+                ? "Enter your registered email or mobile number to download your eBadge"
                 : "Enter the OTP sent to your email/mobile"}
             </CardTitle>
             {/* <CardDescription className="text-center">
